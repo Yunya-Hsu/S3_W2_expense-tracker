@@ -1,1 +1,75 @@
-<h1>This is home page!</h1>
+<div class="container mt-5 mb-5">
+
+  <div class="row" id="dropdown">
+    <div class="dropdown mb-3 col d-flex justify-content-center align-items-center">
+      請選擇類別：
+      <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+        類別
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <li><a class="dropdown-item" href="?keyword={{ keyword }}&OM=1">家居物業</a></li>
+        <li><a class="dropdown-item" href="?keyword={{ keyword }}&OM=2">交通出行</a></li>
+        <li><a class="dropdown-item" href="?keyword={{ keyword }}&OM=3">休閒娛樂</a></li>
+        <li><a class="dropdown-item" href="?keyword={{ keyword }}&OM=4">餐飲食品</a></li>
+        <li><a class="dropdown-item" href="?keyword={{ keyword }}&OM=5">其他</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row d-flex justify-content-center" id="total">
+    <div class="col-8">
+      總金額：
+      <h1 style="color: red;">25260</h1>
+    </div>
+  </div>
+
+  <div class="row d-flex justify-content-center" id="expense-list">
+    <div class="col-8">
+      <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">類別</th>
+          <th scope="col">支出明細</th>
+          <th scope="col">金額</th>
+          <th scope="col">修改</th>
+          <th scope="col">刪除</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td scope="row" style="vertical-align: middle">
+            <i class="fa-solid fa-house" style="font-size: 50px; color: #83D2E0"></i>
+          </td>
+          <td style="vertical-align: middle">
+            <span style="display: block; font-size: 25px">午餐</span>
+            <span style="display: block; font-size: 10px">2022/6/19</span>
+          </td>
+          <td style="vertical-align: middle">
+            <h5>60</h5>
+          </td>
+          <td style="vertical-align: middle">
+            <a href="/expense/edit">
+              <i class="fa-solid fa-pen-to-square" style="font-size: 18px"></i>
+            </a>
+          </td>
+          <td style="vertical-align: middle">
+            <a href="/expense/delete">
+              <i class="fa-solid fa-trash-can" style="font-size: 18px"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    </div> 
+    
+  </div>
+
+  <div class="row" id="add-expense">
+    <div class="d-flex justify-content-center">
+      <a href="/expense/new" class="btn btn-secondary">新增支出</a>
+    </div>
+  </div>
+
+</div>
