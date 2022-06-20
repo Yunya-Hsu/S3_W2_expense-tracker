@@ -25,6 +25,12 @@ router.get('/new', (req, res) => {
 // after submit at "create" page
 router.post('/new', (req, res) => {
   const newExpense = req.body
+  let selectedCategoryIcon = ''
+  for (const i of categoryIdFromDB) {
+    if (String(i._id) === String(newExpense.categoryId)) {
+      selectedCategoryIcon = String(i.icon)
+    }
+  }
 
   // 檢查輸入內容是否都有輸入
   if (!newExpense.categoryId || !newExpense.name || !newExpense.createdDate || !newExpense.amount) {
@@ -36,6 +42,7 @@ router.post('/new', (req, res) => {
   }
 
   newExpense.userId = req.session.passport.user // 把 userId 加入要新增的資料中
+  newExpense.categoryIcon = selectedCategoryIcon
 
   Expense.create(newExpense)
     .then(() => res.redirect('/'))
@@ -76,11 +83,20 @@ router.get('/:id/edit', (req, res) => {
 // after submit at "edit" page
 router.put('/:id', (req, res) => {
   const result = req.body
-  result._id = req.params.id
 
   if (!result.categoryId) { // 若沒有選擇 category
     return res.render('edit', { result, category: categoryIdFromDB })
   }
+
+  let selectedCategoryIcon = ''
+  for (const i of categoryIdFromDB) {
+    if (String(i._id) === String(result.categoryId)) {
+      selectedCategoryIcon = String(i.icon)
+    }
+  }
+
+  result._id = req.params.id
+  result.categoryIcon = selectedCategoryIcon
 
   Expense.findOne({
     $and: [

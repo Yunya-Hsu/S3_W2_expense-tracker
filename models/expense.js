@@ -25,6 +25,10 @@ const expenseSchema = new Schema({
   createdDate: {
     type: String,
     default: Date.now
+  },
+  categoryIcon: {
+    type: String,
+    required: true
   }
 })
 
