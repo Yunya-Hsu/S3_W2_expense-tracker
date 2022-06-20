@@ -1,0 +1,31 @@
+<div class="container-fluid mt-5 mb-5">
+  <div class="row d-flex justify-content-center">
+    <div class="col-7">
+      <form action="/users/register" method="POST">
+        <div class="mb-3 d-flex justify-content-center align-items-center">
+          <h2>註冊</h2>
+        </div>
+        <div class="mb-3 d-flex justify-content-center align-items-center">
+          <label for="name" class="text-secondary">名稱：</label>
+          <input type="text" name="name" id="name" placeholder="enter your name" style="width: 200px; height: 35px" required value={{name}}>
+        </div>
+        <div class="mb-3 d-flex justify-content-center align-items-center">
+          <label for="email" class="text-secondary">帳號：</label>
+          <input type="email" name="email" id="email" placeholder="enter email" style="width: 200px; height: 35px" required value={{email}}>
+        </div>
+        <div class="mb-3 d-flex justify-content-center align-items-center">
+          <label for="password" class="text-secondary">密碼：</label>
+          <input type="password" name="password" id="password" placeholder="enter password" style="width: 200px; height: 35px" required value={{password}}>
+        </div>
+        <div class="mb-3 d-flex justify-content-center align-items-center">
+          <label for="confirmedPassword" class="text-secondary">確認密碼：</label>
+          <input type="password" name="confirmedPassword" id="confirmedPassword" placeholder="enter confirmed password" style="width: 200px; height: 35px" required value={{confirmedPassword}}>
+        </div>
+        
+        <div class="mt-4 mb-5 d-flex justify-content-center">
+          <button type="submit" class="btn btn-secondary mr-2" style="width: 200px; height: 35px">註冊</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
