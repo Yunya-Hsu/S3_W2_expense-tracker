@@ -17,7 +17,7 @@ module.exports = app => {
       User.findOne({ email })
         .then(user => {
           if (!user) {
-            req.flash('loginFail', '此帳號未被註冊，請確認輸入是否正確、或進行註冊')
+            req.flash('loginFail', '此帳號未被註冊。請確認輸入是否正確。')
             return done(null, false)
           }
 

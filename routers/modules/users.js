@@ -5,7 +5,10 @@ const router = express.Router()
 const User = require('../../models/user')
 
 router.get('/login', (req, res) => {
-  res.render('login')
+  res.render('login', {
+    loginFail: req.flash('loginFail'),
+    registerSuccess: req.flash('registerSuccess')
+  })
 })
 
 router.post('/login', passport.authenticate('local', {
@@ -21,21 +24,23 @@ router.post('/register', (req, res) => {
   const { name, email, password, confirmedPassword } = req.body
 
   if (!name || !email || !password || !confirmedPassword) {
-    console.log('有地方沒填')
+    req.flash('somethingMissing', '請確認所有欄位皆已填寫，再送出')
     return res.render('register', {
       name,
       email,
       password,
-      confirmedPassword
+      confirmedPassword,
+      somethingMissing: req.flash('somethingMissing')
     })
   }
 
   if (password !== confirmedPassword) {
-    console.log('兩次密碼不符')
+    req.flash('wrongConfirmedPassword', '確認密碼不符，請重新輸入')
     return res.render('register', {
       name,
       email,
-      password
+      password,
+      wrongConfirmedPassword: req.flash('wrongConfirmedPassword')
     })
   }
 
@@ -43,18 +48,20 @@ router.post('/register', (req, res) => {
     .then(user => {
       // find same email account
       if (user) {
-        console.log('該email已註冊，請重新檢查', user)
+        req.flash('existEmail', '該email已註冊，請重新檢查')
         return res.render('register', {
           name,
           email,
           password,
-          confirmedPassword
+          confirmedPassword,
+          existEmail: req.flash('existEmail')
         })
       }
 
       // can't find same account, so establish account
       User.create({ name, email, password })
         .then(() => {
+          req.flash('registerSuccess', '您已成功註冊，請登入帳號')
           res.redirect('/users/login')
         })
     })

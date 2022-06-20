@@ -16,7 +16,8 @@ Category.find()
 // show "create" page
 router.get('/new', (req, res) => {
   if (categoryIdFromDB.length <= 0) {
-    return console.log('Please establish category seed first!')
+    req.flash('noCategory', '請先建立 category 的種子資料')
+    return res.redirect('/')
   }
   res.render('new', { category: categoryIdFromDB })
 })

@@ -1,6 +1,13 @@
 <div class="container mt-5 mb-5">
 
   <div class="row" id="dropdown">
+    {{#if noCategory}}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{noCategory}}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {{/if}}
+    
     <div class="dropdown mb-3 col d-flex justify-content-center align-items-center">
       請選擇類別：
       <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">

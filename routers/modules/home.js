@@ -25,7 +25,12 @@ router.get('/', (req, res) => {
         for (const i of result) {
           totalAmount += Number(i.amount)
         }
-        res.render('index', { result, category: categoryIdFromDB, totalAmount })
+        res.render('index', {
+          result,
+          category: categoryIdFromDB,
+          totalAmount,
+          noCategory: req.flash('noCategory')
+        })
       })
       .catch(err => console.log(err))
   } else {
@@ -37,7 +42,12 @@ router.get('/', (req, res) => {
         for (const i of result) {
           totalAmount += Number(i.amount)
         }
-        res.render('index', { result, category: categoryIdFromDB, totalAmount })
+        res.render('index', {
+          result,
+          category: categoryIdFromDB,
+          totalAmount,
+          noCategory: req.flash('noCategory')
+        })
       })
       .catch(err => console.log(err))
   }
