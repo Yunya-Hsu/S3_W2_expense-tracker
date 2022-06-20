@@ -11,12 +11,20 @@ router.get('/new', (req, res) => {
 router.post('/new', (req, res) => {
   const newExpense = req.body
   newExpense.userId = 'test123'
-  
+
   if (!newExpense.categoryId) {
     res.render('new', { newExpense })
   }
 
   Expense.create(newExpense)
+    .then(() => res.redirect('/'))
+    .catch(err => console.error(err))
+})
+
+router.delete('/:id', (req, res) => {
+  const _id = req.params.id
+  Expense.findOne({ _id })
+    .then(theExpense => theExpense.remove())
     .then(() => res.redirect('/'))
     .catch(err => console.error(err))
 })

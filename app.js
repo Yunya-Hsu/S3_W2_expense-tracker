@@ -21,7 +21,7 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
 app.use(express.urlencoded({ extended: true })) // 設定body-parser(解析post傳回來的req，body-parser已包在express中)
-app.use(methodOverride('_method'))  // 設定每一筆請求都會透過method-override進行前置處理
+app.use(methodOverride('_method')) // 設定每一筆請求都會透過method-override進行前置處理
 
 // 啟動路由
 app.use(router)

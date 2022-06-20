@@ -53,13 +53,15 @@
           </td>
           <td style="vertical-align: middle">
             <a href="/expense/{{this._id}}/edit">
-              <i class="fa-solid fa-pen-to-square" style="font-size: 18px"></i>
+              <i class="fa-solid fa-pen-to-square" style="font-size: 18px; color: #83D2E0"></i>
             </a>
           </td>
           <td style="vertical-align: middle">
-            <a href="/expense/{{this._id}}/delete">
-              <i class="fa-solid fa-trash-can" style="font-size: 18px"></i>
-            </a>
+            <form action="./expense/{{ this._id }}/?_method=DELETE" method="POST" style="display: inline;">
+              <button type="submit" class="btn">
+                <i class="fa-solid fa-trash-can" style="font-size: 18px; color: #83D2E0"></i>
+              </button>
+            </form>
           </td>
         </tr>
         {{/each}}
