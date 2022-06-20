@@ -18,11 +18,11 @@
           <label for="categoryId" class="text-secondary">類別*：</label>
           <select name="categoryId" id="categoryId" style="width: 200px; height: 35px" required>
             <option value="none" selected disabled hidden>選擇類別</option>
-            <option value="1">家居物業</option>
-            <option value="2">交通出行</option>
-            <option value="3">休閒娛樂</option>
-            <option value="4">餐飲食品</option>
-            <option value="5">其他</option>
+            {{#if category}}
+            {{#each category}}
+              <option value={{this._id}}>{{this.name}}</option>
+            {{/each}}
+            {{/if}}
           </select>
         </div>
         <div class="mb-3 d-flex justify-content-around align-items-center">
