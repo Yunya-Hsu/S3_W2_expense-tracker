@@ -12,6 +12,7 @@ const flash = require('connect-flash')
 
 const port = process.env.PORT
 const router = require('./routers/index')
+const usePassport = require('./config/passport')
 
 // 與mongoDB連線
 require('./config/mongoose')
@@ -27,6 +28,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }))
+usePassport(app)
 app.use(flash())
 app.use(express.urlencoded({ extended: true })) // 設定body-parser(解析post傳回來的req，body-parser已包在express中)
 app.use(methodOverride('_method')) // 設定每一筆請求都會透過method-override進行前置處理
