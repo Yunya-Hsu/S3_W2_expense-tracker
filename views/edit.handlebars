@@ -1,18 +1,18 @@
 <div class="container-fluid mt-5 mb-5">
   <div class="row d-flex justify-content-center">
     <div class="col-7">
-      <form action="/expense/new" method="post">
+      <form action="/expense/{{ result._id }}/?_method=PUT" method="post">
         <div class="mb-3 d-flex justify-content-around align-items-center">
           <span class="text-secondary">*必填欄位</span>
-          <span class="text-secondary" style="font-size: 24px;">請輸入你的支出</span>
+          <span class="text-secondary" style="font-size: 24px;">請修改你的支出</span>
         </div>
         <div class="mb-3 d-flex justify-content-around align-items-center">
           <label for="name" class="text-secondary">名稱*：</label>
-          <input type="text" name="name" id="name" style="width: 200px; height: 35px" required value={{newExpense.name}}>
+          <input type="text" name="name" id="name" style="width: 200px; height: 35px" required value={{result.name}}>
         </div>
         <div class="mb-3 d-flex justify-content-around align-items-center">
           <label for="createdDate" class="text-secondary">日期*：</label>
-          <input type="date" name="createdDate" id="createdDate" style="width: 200px; height: 35px" required value={{newExpense.createdDate}}>
+          <input type="date" name="createdDate" id="createdDate" style="width: 200px; height: 35px" required value={{result.createdDate}}>
         </div>
         <div class="mb-3 d-flex justify-content-around align-items-center">
           <label for="categoryId" class="text-secondary">類別*：</label>
@@ -27,10 +27,12 @@
         </div>
         <div class="mb-3 d-flex justify-content-around align-items-center">
           <label for="amount" class="text-secondary">金額*：</label>
-          <input type="number" name="amount" id="amount" min="0" style="width: 200px; height: 35px" required value={{newExpense.amount}}>
+          <input type="number" name="amount" id="amount" min="0" style="width: 200px; height: 35px" required value={{result.amount}}>
         </div>
         <div class="mt-4 mb-5 d-flex justify-content-center">
-          <button type="submit" class="btn btn-secondary mr-2" style="width: 200px; height: 35px">新增支出</button>
+          <button type="submit" class="btn btn-primary mr-2" style="width: 200px; height: 35px">
+            儲存修改
+          </button>
         </div>
       </form>
     </div>
