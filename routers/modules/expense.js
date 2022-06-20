@@ -8,7 +8,9 @@ const Category = require('../../models/category')
 let categoryIdFromDB = []
 Category.find()
   .lean()
-  .then(result => categoryIdFromDB = result)
+  .then(result => {
+    categoryIdFromDB = result
+  })
   .catch(err => console.error(err))
 
 // show "create" page

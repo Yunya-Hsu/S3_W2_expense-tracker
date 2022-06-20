@@ -7,19 +7,19 @@
         類別
       </a>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <li><a class="dropdown-item" href="?keyword={{ keyword }}&OM=1">家居物業</a></li>
-        <li><a class="dropdown-item" href="?keyword={{ keyword }}&OM=2">交通出行</a></li>
-        <li><a class="dropdown-item" href="?keyword={{ keyword }}&OM=3">休閒娛樂</a></li>
-        <li><a class="dropdown-item" href="?keyword={{ keyword }}&OM=4">餐飲食品</a></li>
-        <li><a class="dropdown-item" href="?keyword={{ keyword }}&OM=5">其他</a></li>
+        {{#if category}}
+        {{#each category}}
+        <li><a class="dropdown-item" href="?OM={{this._id}}">{{this.name}}</a></li>
+        {{/each}}
+        {{/if}}
       </ul>
     </div>
   </div>
 
   <div class="row d-flex justify-content-center" id="total">
     <div class="col-8">
-      總金額：
-      <h1 style="color: red;">25260</h1>
+      <span>總金額：</span>
+      <h1 style="color: red; text-align: center">{{ totalAmount }}</h1>
     </div>
   </div>
 
