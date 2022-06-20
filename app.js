@@ -7,6 +7,8 @@ if (process.env.NODE_ENV !== 'production') {
 const express = require('express')
 const exphbs = require('express-handlebars')
 const methodOverride = require('method-override')
+const session = require('express-session')
+const flash = require('connect-flash')
 
 const port = process.env.PORT
 const router = require('./routers/index')
@@ -20,6 +22,12 @@ const app = express()
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true
+}))
+app.use(flash())
 app.use(express.urlencoded({ extended: true })) // 設定body-parser(解析post傳回來的req，body-parser已包在express中)
 app.use(methodOverride('_method')) // 設定每一筆請求都會透過method-override進行前置處理
 
