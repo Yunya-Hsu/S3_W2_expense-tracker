@@ -1,7 +1,7 @@
 <div class="container-fluid mt-5 mb-5">
   <div class="row d-flex justify-content-center">
     <div class="col-7">
-      <form action="/expense" method="post">
+      <form action="/expense/new" method="post">
         <div class="mb-3 d-flex justify-content-around align-items-center">
           <span class="text-secondary">*必填欄位</span>
           <span class="text-secondary" style="font-size: 24px;">請輸入你的支出</span>
@@ -11,12 +11,12 @@
           <input type="text" name="name" id="name" style="width: 200px; height: 35px" required>
         </div>
         <div class="mb-3 d-flex justify-content-around align-items-center">
-          <label for="createdAt" class="text-secondary">日期*：</label>
-          <input type="date" placeholder="2022/1/15" name="createdAt" id="createdAt" style="width: 200px; height: 35px" required>
+          <label for="createdDate" class="text-secondary">日期*：</label>
+          <input type="date" name="createdDate" id="createdDate" style="width: 200px; height: 35px" required>
         </div>
         <div class="mb-3 d-flex justify-content-around align-items-center">
-          <label for="category" class="text-secondary">類別*：</label>
-          <select name="category" id="category" style="width: 200px; height: 35px" required>
+          <label for="categoryId" class="text-secondary">類別*：</label>
+          <select name="categoryId" id="categoryId" style="width: 200px; height: 35px" required>
             <option value="1">家居物業</option>
             <option value="2">交通出行</option>
             <option value="3">休閒娛樂</option>

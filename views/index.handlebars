@@ -37,16 +37,19 @@
       </thead>
 
       <tbody>
+        {{#if result}}
+        {{#each result}}
         <tr>
           <td scope="row" style="vertical-align: middle">
+            {{!-- TODO: update by createId --}}
             <i class="fa-solid fa-house" style="font-size: 50px; color: #83D2E0"></i>
           </td>
           <td style="vertical-align: middle">
-            <span style="display: block; font-size: 25px">午餐</span>
-            <span style="display: block; font-size: 10px">2022/6/19</span>
+            <span style="display: block; font-size: 25px">{{this.name}}</span>
+            <span style="display: block; font-size: 10px">{{this.createdDate}}</span>
           </td>
           <td style="vertical-align: middle">
-            <h5>60</h5>
+            <h5>{{this.amount}}</h5>
           </td>
           <td style="vertical-align: middle">
             <a href="/expense/edit">
@@ -59,6 +62,8 @@
             </a>
           </td>
         </tr>
+        {{/each}}
+        {{/if}}
       </tbody>
     </table>
 

@@ -11,19 +11,21 @@ const expenseSchema = new Schema({
     required: true
   },
   categoryId: {
-    type: Schema.Types.ObjectId,
-    ref: 'category',
-    index: true,
+    // type: Schema.Types.ObjectId,
+    // ref: 'category',
+    // index: true,
+    type: String,
     required: true
   },
   userId: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-    index: true,
+    // type: Schema.Types.ObjectId,
+    // ref: 'User',
+    // index: true,
+    type: String,
     required: true
   },
-  createdAt: {
-    type: Date,
+  createdDate: {
+    type: String,
     default: Date.now
   }
 })
