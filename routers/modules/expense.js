@@ -26,13 +26,16 @@ router.get('/new', (req, res) => {
 router.post('/new', (req, res) => {
   const newExpense = req.body
 
-  // 檢查輸入內容
+  // 檢查輸入內容是否都有輸入
   if (!newExpense.categoryId || !newExpense.name || !newExpense.createdDate || !newExpense.amount) {
-    // TODO: add connect-flash
-    return res.render('new', { newExpense })
+    req.flash('somethingMissing', '請確認所有欄位皆已填寫，再送出')
+    return res.render('new', { 
+      newExpense,
+      somethingMissing: req.flash('somethingMissing')
+    })
   }
 
-  newExpense.userId = 'test123'
+  newExpense.userId = req.session.passport.user // 把 userId 加入要新增的資料中
 
   Expense.create(newExpense)
     .then(() => res.redirect('/'))
@@ -41,8 +44,12 @@ router.post('/new', (req, res) => {
 
 // delete
 router.delete('/:id', (req, res) => {
-  const _id = req.params.id
-  Expense.findOne({ _id })
+  Expense.findOne({
+    $and: [
+      { _id: req.params.id },
+      { userId: req.session.passport.user }
+    ]
+  })
     .then(theExpense => theExpense.remove())
     .then(() => res.redirect('/'))
     .catch(err => console.error(err))
@@ -50,11 +57,17 @@ router.delete('/:id', (req, res) => {
 
 // show "edit" page
 router.get('/:id/edit', (req, res) => {
-  const _id = req.params.id
-  Expense.findOne({ _id })
+  Expense.findOne({
+    $and: [
+      { _id: req.params.id },
+      { userId: req.session.passport.user }
+    ]
+  })
     .lean()
     .then(result => {
-      res.render('edit', { result, category: categoryIdFromDB })
+      res.render('edit', { 
+        result,
+        category: categoryIdFromDB })
     })
     .catch(err => console.error(err))
 })
@@ -62,14 +75,18 @@ router.get('/:id/edit', (req, res) => {
 // after submit at "edit" page
 router.put('/:id', (req, res) => {
   const result = req.body
-  const _id = req.params.id
-  result._id = _id
+  result._id = req.params.id
 
-  if (!result.categoryId) {
+  if (!result.categoryId) { //若沒有選擇 category
     res.render('edit', { result, category: categoryIdFromDB })
   }
 
-  Expense.findOne({ _id })
+  Expense.findOne({
+    $and: [
+      { _id: req.params.id },
+      { userId: req.session.passport.user }
+    ]
+  })
     .then(theExpense => {
       for (const key of Object.keys(result)) {
         theExpense[key] = result[key]

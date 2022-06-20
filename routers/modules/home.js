@@ -17,7 +17,12 @@ router.get('/', (req, res) => {
   const selectedCategory = req.query.OM || 0
 
   if (selectedCategory) {
-    Expense.find({ categoryId: selectedCategory }) // TODO: find by req.user._id
+    Expense.find({ 
+      $and: [
+        { categoryId: selectedCategory },
+        { userId: req.session.passport.user }
+      ]
+    })
       .lean()
       .sort({ createdDate: 'desc' })
       .then(result => {
@@ -34,7 +39,7 @@ router.get('/', (req, res) => {
       })
       .catch(err => console.log(err))
   } else {
-    Expense.find() // TODO: find by req.user._id
+    Expense.find({ userId: req.session.passport.user })
       .lean()
       .sort({ createdDate: 'desc' })
       .then(result => {
