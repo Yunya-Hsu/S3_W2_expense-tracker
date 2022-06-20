@@ -32,6 +32,11 @@ usePassport(app)
 app.use(flash())
 app.use(express.urlencoded({ extended: true })) // 設定body-parser(解析post傳回來的req，body-parser已包在express中)
 app.use(methodOverride('_method')) // 設定每一筆請求都會透過method-override進行前置處理
+app.use((req, res, next) => { // 自訂一個全部使用的middleware，把isAuthenticated和user資料狀態傳給res.locals使用
+  res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.user = req.user
+  next()
+})
 
 // 啟動路由
 app.use(router)

@@ -19,8 +19,13 @@
       <div class="container-fluid">
         <a class="navbar-brand" href="/">家庭記帳本</a>
         <div>
+          {{#if isAuthenticated}}
+          <a href="/users/logout" class="btn btn-dark">Logout</a>
+          {{else}}
           <a href="/users/login" class="btn btn-dark">Login</a>
           <a href="/users/register" class="btn btn-primary">Register</a>
+          {{/if}}
+          
         </div>
       </div>
     </nav>
