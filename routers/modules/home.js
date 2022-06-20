@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
   const selectedCategory = req.query.OM || 0
 
   if (selectedCategory) {
-    Expense.find({ 
+    Expense.find({
       $and: [
         { categoryId: selectedCategory },
         { userId: req.session.passport.user }

@@ -29,7 +29,7 @@ router.post('/new', (req, res) => {
   // 檢查輸入內容是否都有輸入
   if (!newExpense.categoryId || !newExpense.name || !newExpense.createdDate || !newExpense.amount) {
     req.flash('somethingMissing', '請確認所有欄位皆已填寫，再送出')
-    return res.render('new', { 
+    return res.render('new', {
       newExpense,
       somethingMissing: req.flash('somethingMissing')
     })
@@ -65,9 +65,10 @@ router.get('/:id/edit', (req, res) => {
   })
     .lean()
     .then(result => {
-      res.render('edit', { 
+      res.render('edit', {
         result,
-        category: categoryIdFromDB })
+        category: categoryIdFromDB
+      })
     })
     .catch(err => console.error(err))
 })
@@ -77,8 +78,8 @@ router.put('/:id', (req, res) => {
   const result = req.body
   result._id = req.params.id
 
-  if (!result.categoryId) { //若沒有選擇 category
-    res.render('edit', { result, category: categoryIdFromDB })
+  if (!result.categoryId) { // 若沒有選擇 category
+    return res.render('edit', { result, category: categoryIdFromDB })
   }
 
   Expense.findOne({

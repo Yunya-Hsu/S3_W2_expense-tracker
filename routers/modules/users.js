@@ -1,13 +1,14 @@
 const express = require('express')
 const passport = require('passport')
+const bcrypt = require('bcryptjs')
 const router = express.Router()
 
 const User = require('../../models/user')
 
 router.get('/login', (req, res) => {
   res.render('login', {
-    loginFail: req.flash('loginFail'),
-    registerSuccess: req.flash('registerSuccess')
+    loginFail: req.flash('loginFail'), // 來自config/passport.js的訊息
+    registerSuccess: req.flash('registerSuccess') // 來自POST /users/register的訊息
   })
 })
 
@@ -59,7 +60,14 @@ router.post('/register', (req, res) => {
       }
 
       // can't find same account, so establish account
-      User.create({ name, email, password })
+      return bcrypt
+        .genSalt(10)
+        .then(salt => bcrypt.hash(password, salt))
+        .then(hash => User.create({
+          name,
+          email,
+          password: hash
+        }))
         .then(() => {
           req.flash('registerSuccess', '您已成功註冊，請登入帳號')
           res.redirect('/users/login')
