@@ -17,12 +17,11 @@
         <div class="mb-3 d-flex justify-content-around align-items-center">
           <label for="categoryId" class="text-secondary">類別*：</label>
           <select name="categoryId" id="categoryId" style="width: 200px; height: 35px" required>
-            <option value="none" selected disabled hidden>選擇類別</option>
-            {{#if category}}
             {{#each category}}
-              <option value={{this._id}}>{{this.name}}</option>
+              <option value={{this._id}} {{#compare this._id "==" this.isSelectedId}}selected{{/compare}}>
+                {{this.name}}
+              </option>
             {{/each}}
-            {{/if}}
           </select>
         </div>
         <div class="mb-3 d-flex justify-content-around align-items-center">

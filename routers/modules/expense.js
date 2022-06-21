@@ -37,7 +37,8 @@ router.post('/new', (req, res) => {
     req.flash('somethingMissing', '請確認所有欄位皆已填寫，再送出')
     return res.render('new', {
       newExpense,
-      somethingMissing: req.flash('somethingMissing')
+      somethingMissing: req.flash('somethingMissing'),
+      category: categoryIdFromDB
     })
   }
 
@@ -64,6 +65,13 @@ router.delete('/:id', (req, res) => {
 
 // show "edit" page
 router.get('/:id/edit', (req, res) => {
+  if (categoryIdFromDB.length <= 0) {
+    req.flash('noCategory', '請先建立 category 的種子資料')
+    return res.redirect('/')
+  }
+
+  const categoryListForEdit = categoryIdFromDB
+
   Expense.findOne({
     $and: [
       { _id: req.params.id },
@@ -72,9 +80,12 @@ router.get('/:id/edit', (req, res) => {
   })
     .lean()
     .then(result => {
+      for (const i of categoryListForEdit) {
+        i.isSelectedId = String(result.categoryId)
+      }
       res.render('edit', {
         result,
-        category: categoryIdFromDB
+        category: categoryListForEdit
       })
     })
     .catch(err => console.error(err))
@@ -83,10 +94,6 @@ router.get('/:id/edit', (req, res) => {
 // after submit at "edit" page
 router.put('/:id', (req, res) => {
   const result = req.body
-
-  if (!result.categoryId) { // 若沒有選擇 category
-    return res.render('edit', { result, category: categoryIdFromDB })
-  }
 
   let selectedCategoryIcon = ''
   for (const i of categoryIdFromDB) {

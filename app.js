@@ -9,6 +9,8 @@ const exphbs = require('express-handlebars')
 const methodOverride = require('method-override')
 const session = require('express-session')
 const flash = require('connect-flash')
+const helpers = require('handlebars-helpers')
+const multihelpers = helpers()
 
 const port = process.env.PORT
 const router = require('./routers/index')
@@ -20,7 +22,7 @@ require('./config/mongoose')
 const app = express()
 
 // 使用handlebars
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
+app.engine('handlebars', exphbs({ helpers: multihelpers, defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
 app.use(session({
