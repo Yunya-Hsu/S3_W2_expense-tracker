@@ -43,7 +43,7 @@ router.post('/new', (req, res) => {
   }
 
   newExpense.userId = req.session.passport.user // 把 userId 加入要新增的資料中
-  newExpense.categoryIcon = selectedCategoryIcon
+  newExpense.categoryIcon = selectedCategoryIcon // 把 Icon 加入要新增的資料中
 
   Expense.create(newExpense)
     .then(() => res.redirect('/'))

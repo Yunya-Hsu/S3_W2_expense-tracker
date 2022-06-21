@@ -9,9 +9,13 @@
     {{/if}}
     
     <div class="dropdown mb-3 col d-flex justify-content-center align-items-center">
-      請選擇類別：
+    <span class="m-3">排序方式</span>
       <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-        類別
+        {{#if selectedCategoryName}}
+        {{selectedCategoryName}}
+        {{else}}
+        選擇類別
+        {{/if}}
       </a>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
         {{#if category}}
@@ -48,8 +52,7 @@
         {{#each result}}
         <tr>
           <td scope="row" style="vertical-align: middle">
-            {{!-- TODO: update by createId --}}
-            <i class="fa-solid {{this.categoryIcon}}" style="font-size: 50px; color: #83D2E0"></i>
+            <i class="fa-solid {{this.categoryIcon}}" style="font-size: 45px; color: #83D2E0"></i>
           </td>
           <td style="vertical-align: middle">
             <span style="display: block; font-size: 25px">{{this.name}}</span>
@@ -60,13 +63,13 @@
           </td>
           <td style="vertical-align: middle">
             <a href="/expense/{{this._id}}/edit">
-              <i class="fa-solid fa-pen-to-square" style="font-size: 18px; color: #83D2E0"></i>
+              <i class="fa-solid fa-pen-to-square" style="font-size: 22px; color: #83D2E0"></i>
             </a>
           </td>
           <td style="vertical-align: middle">
             <form action="./expense/{{ this._id }}/?_method=DELETE" method="POST" style="display: inline;">
               <button type="submit" class="btn">
-                <i class="fa-solid fa-trash-can" style="font-size: 18px; color: #83D2E0"></i>
+                <i class="fa-solid fa-trash-can" style="font-size: 22px; color: #83D2E0"></i>
               </button>
             </form>
           </td>

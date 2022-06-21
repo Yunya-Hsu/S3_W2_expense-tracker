@@ -17,18 +17,20 @@ module.exports = app => {
     (req, email, password, done) => {
       User.findOne({ email })
         .then(user => {
+          // can't find this email at User collection in MongoDB
           if (!user) {
             req.flash('loginFail', '此帳號未被註冊。請確認輸入是否正確。')
             return done(null, false)
           }
 
+          // find the user
           return bcrypt.compare(password, user.password)
             .then(isMatch => {
-              if (!isMatch) {
+              if (!isMatch) { // password doesn't match
                 req.flash('loginFail', '密碼有誤，請重新輸入。')
                 return done(null, false)
               }
-              return done(null, user)
+              return done(null, user) // password match, so continue to do serialize & deserialize
             })
         })
         .catch(err => done(err, false))
